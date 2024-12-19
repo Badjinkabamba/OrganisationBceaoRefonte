@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://structureDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="structureDc"
+                  class="com.company.organisationbceaorefonte.entity.Structure">
+            <fetchPlan extends="_base">
+                <property name="typeStructure" fetchPlan="_base"/>
+                <property name="site" fetchPlan="_base"/>
+                <property name="structureParent" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="structureDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="structureDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="codeField" property="code"/>
+            <textField id="libelleField" property="libelle"/>
+            <entityPicker id="typeStructureField" property="typeStructure">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="siteField" property="site">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="structureParentField" property="structureParent" label="Structure de rattachement">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="levelPathField" property="levelPath"/>
+            <textArea id="treePathField" height="9.5em" property="treePath"/>
+            <!--<textField id="referenceField" property="reference"/>-->
+            <textArea id="commentaireField" height="9.5em" property="commentaire"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

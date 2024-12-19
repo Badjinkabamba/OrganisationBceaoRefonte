@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://siteDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="siteDc"
+                  class="com.company.organisationbceaorefonte.entity.Site">
+            <fetchPlan extends="_base">
+                <property name="pays" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="siteDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="siteDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="codeField" property="code"/>
+            <textField id="libelleField" property="libelle"/>
+            <textField id="adresseField" property="adresse"/>
+            <textField id="telephoneField" property="telephone"/>
+            <textField id="faxField" property="fax"/>
+            <entityPicker id="paysField" property="pays">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

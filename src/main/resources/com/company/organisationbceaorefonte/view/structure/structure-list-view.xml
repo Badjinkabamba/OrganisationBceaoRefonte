@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://structureListView.title"
+      focusComponent="structuresDataGrid">
+    <data>
+        <collection id="structuresDc"
+                    class="com.company.organisationbceaorefonte.entity.Structure">
+            <fetchPlan extends="_base">
+                <property name="typeStructure" fetchPlan="_base"/>
+                <property name="site" fetchPlan="_base"/>
+                <property name="structureParent" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="structuresDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Structure e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="structuresDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="structuresDataGrid.create"/>
+            <button id="editButton" action="structuresDataGrid.edit"/>
+            <button id="refreshButton" action="structuresDataGrid.refresh"/>
+            <button id="removeButton" action="structuresDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="structuresDl"/>
+        </hbox>
+        <dataGrid id="structuresDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="structuresDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="code"/>
+                <column property="libelle"/>
+                <column property="typeStructure"/>
+                <column property="site"/>
+                <column property="structureParent" header="Structure de rattachement"/>
+                <!--<column property="levelPath"/>
+                <column property="treePath"/>
+                <column property="reference"/>
+                <column property="commentaire"/>-->
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

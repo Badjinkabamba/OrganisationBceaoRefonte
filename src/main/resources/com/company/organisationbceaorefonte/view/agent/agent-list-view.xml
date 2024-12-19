@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://agentListView.title"
+      focusComponent="agentsDataGrid">
+    <data>
+        <collection id="agentsDc"
+                    class="com.company.organisationbceaorefonte.entity.Agent">
+            <fetchPlan extends="_base">
+                <property name="structure" fetchPlan="_base"/>
+                <property name="siteBudgetaire" fetchPlan="_base"/>
+                <property name="siteAffectation" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="agentsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Agent e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="agentsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="agentsDataGrid.create"/>
+            <button id="editButton" action="agentsDataGrid.edit"/>
+            <button id="refreshButton" action="agentsDataGrid.refresh"/>
+            <button id="removeButton" action="agentsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="agentsDl"/>
+        </hbox>
+        <dataGrid id="agentsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="agentsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="matricule"/>
+                <column property="nomPatronomique"/>
+                <column property="prenoms"/>
+                <column property="adresse"/>
+                <column property="telephone"/>
+                <column property="email"/>
+                <column property="dateNaissance"/>
+                <column property="lieuNaissance"/>
+                <column property="nationnalite"/>
+                <column property="sexe"/>
+                <column property="dateEmbauche"/>
+                <column property="structure"/>
+                <column property="siteBudgetaire"/>
+                <column property="siteAffectation"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://agentDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="agentDc"
+                  class="com.company.organisationbceaorefonte.entity.Agent">
+            <fetchPlan extends="_base">
+                <property name="structure" fetchPlan="_base"/>
+                <property name="siteBudgetaire" fetchPlan="_base"/>
+                <property name="siteAffectation" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="agentDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="agentDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="matriculeField" property="matricule"/>
+            <textField id="nomPatronomiqueField" property="nomPatronomique"/>
+            <textField id="prenomsField" property="prenoms"/>
+            <textField id="adresseField" property="adresse"/>
+            <textField id="telephoneField" property="telephone"/>
+            <textField id="emailField" property="email"/>
+            <datePicker id="dateNaissanceField" property="dateNaissance"/>
+            <textField id="lieuNaissanceField" property="lieuNaissance"/>
+            <textField id="nationnaliteField" property="nationnalite"/>
+            <select id="sexeField" property="sexe"/>
+            <datePicker id="dateEmbaucheField" property="dateEmbauche"/>
+            <entityPicker id="structureField" property="structure">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="siteBudgetaireField" property="siteBudgetaire">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="siteAffectationField" property="siteAffectation">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

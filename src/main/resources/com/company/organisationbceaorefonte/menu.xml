@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="application" title="msg://com.company.organisationbceaorefonte/menu.application.title" opened="true">
+        <item view="User.list" title="msg://com.company.organisationbceaorefonte.view.user/UserListView.title"/>
+        <item view="Pays.list" title="msg://com.company.organisationbceaorefonte.view.pays/paysListView.title"/>
+        <item view="TypeStructure.list"
+              title="msg://com.company.organisationbceaorefonte.view.typestructure/typeStructureListView.title"/>
+        <item view="Site.list" title="msg://com.company.organisationbceaorefonte.view.site/siteListView.title"/>
+        <item view="Structure.list"
+              title="msg://com.company.organisationbceaorefonte.view.structure/structureListView.title"/>
+        <item view="Agent.list" title="msg://com.company.organisationbceaorefonte.view.agent/agentListView.title"/>
+    </menu>
+
+</menu-config>

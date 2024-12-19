@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://siteListView.title"
+      focusComponent="sitesDataGrid">
+    <data>
+        <collection id="sitesDc"
+                    class="com.company.organisationbceaorefonte.entity.Site">
+            <fetchPlan extends="_base">
+                <property name="pays" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="sitesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Site e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="sitesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="sitesDataGrid.create"/>
+            <button id="editButton" action="sitesDataGrid.edit"/>
+            <button id="refreshButton" action="sitesDataGrid.refresh"/>
+            <button id="removeButton" action="sitesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="sitesDl"/>
+        </hbox>
+        <dataGrid id="sitesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="sitesDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="code"/>
+                <column property="libelle"/>
+                <column property="adresse"/>
+                <column property="telephone"/>
+                <column property="fax"/>
+                <column property="pays"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

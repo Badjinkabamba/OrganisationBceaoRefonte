@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://typeStructureDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="typeStructureDc"
+                  class="com.company.organisationbceaorefonte.entity.TypeStructure">
+            <fetchPlan extends="_base">
+                <property name="typeStructureParent" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="typeStructureDl"/>
+            <collection id="typeStructureParentDc" property="typeStructureParent"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="typeStructureDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <textField id="codeField" property="code"/>
+            <textField id="libelleField" property="libelle"/>
+            <textField id="descriptionField" property="description"/>
+        </formLayout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="typeStructureParentDataGrid.add"/>
+            <button action="typeStructureParentDataGrid.exclude"/>
+        </hbox>
+        <dataGrid id="typeStructureParentDataGrid" dataContainer="typeStructureParentDc" width="100%" height="100%">
+            <actions>
+                <action id="add" type="list_add"/>
+                <action id="exclude" type="list_exclude"/>
+            </actions>
+            <columns>
+                <!--<column property="version"/>
+                <column property="createdBy"/>
+                <column property="createdDate"/>
+                <column property="lastModifiedBy"/>
+                <column property="lastModifiedDate"/>
+                <column property="deletedBy"/>
+                <column property="deletedDate"/>-->
+                <column property="code"/>
+                <column property="libelle"/>
+                <column property="description"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

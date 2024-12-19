@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://typeStructureListView.title"
+      focusComponent="typeStructuresDataGrid">
+    <data>
+        <collection id="typeStructuresDc"
+                    class="com.company.organisationbceaorefonte.entity.TypeStructure">
+            <fetchPlan extends="_base"/>
+            <loader id="typeStructuresDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from TypeStructure e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="typeStructuresDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="typeStructuresDataGrid.create"/>
+            <button id="editButton" action="typeStructuresDataGrid.edit"/>
+            <button id="refreshButton" action="typeStructuresDataGrid.refresh"/>
+            <button id="removeButton" action="typeStructuresDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="typeStructuresDl"/>
+        </hbox>
+        <dataGrid id="typeStructuresDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="typeStructuresDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="code"/>
+                <column property="libelle"/>
+                <column property="description"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

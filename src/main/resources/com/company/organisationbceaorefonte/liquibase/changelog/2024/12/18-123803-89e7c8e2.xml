@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="OrganisationBceaoRefonte">
+        <createTable tableName="TYPE_STRUCTURE_TYPE_LINK">
+            <column name="TYPE_STRUCTURE_1_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TYPE_STRUCTURE_TYPE_LINK"/>
+            </column>
+            <column name="TYPE_STRUCTURE_2_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TYPE_STRUCTURE_TYPE_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="OrganisationBceaoRefonte">
+        <addForeignKeyConstraint baseColumnNames="TYPE_STRUCTURE_1_ID" baseTableName="TYPE_STRUCTURE_TYPE_LINK"
+                                 constraintName="FK_TYPSTRTYP_ON_TYPE_STRUCTURE_1" referencedColumnNames="ID"
+                                 referencedTableName="TYPE_STRUCTURE"/>
+    </changeSet>
+    <changeSet id="3" author="OrganisationBceaoRefonte">
+        <addForeignKeyConstraint baseColumnNames="TYPE_STRUCTURE_2_ID" baseTableName="TYPE_STRUCTURE_TYPE_LINK"
+                                 constraintName="FK_TYPSTRTYP_ON_TYPE_STRUCTURE_2" referencedColumnNames="ID"
+                                 referencedTableName="TYPE_STRUCTURE"/>
+    </changeSet>
+</databaseChangeLog>

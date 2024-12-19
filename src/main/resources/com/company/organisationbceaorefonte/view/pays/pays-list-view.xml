@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://paysListView.title"
+      focusComponent="paysesDataGrid">
+    <data>
+        <collection id="paysesDc"
+                    class="com.company.organisationbceaorefonte.entity.Pays">
+            <fetchPlan extends="_base"/>
+            <loader id="paysesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Pays e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="paysesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="paysesDataGrid.create"/>
+            <button id="editButton" action="paysesDataGrid.edit"/>
+            <button id="refreshButton" action="paysesDataGrid.refresh"/>
+            <button id="removeButton" action="paysesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="paysesDl"/>
+        </hbox>
+        <dataGrid id="paysesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="paysesDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="libelle"/>
+                <column property="codeIso2"/>
+                <column property="codeIso3"/>
+                <column property="isUemoa"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

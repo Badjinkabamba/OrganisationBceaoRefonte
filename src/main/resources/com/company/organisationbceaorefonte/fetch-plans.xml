@@ -1,0 +1,7 @@
+<fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
+    <fetchPlan entity="Structure" name="structure-fetch-plan" extends="_base">
+        <property name="structureParent" fetchPlan="_base">
+            <property name="structureParent" fetchPlan="_base"/>
+        </property>
+    </fetchPlan>
+</fetchPlans>
