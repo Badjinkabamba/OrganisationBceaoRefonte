@@ -17,15 +17,13 @@ public class StructureServiceImpl implements StructureService   {
     }
 
     @Override
-    public Structure save(Structure structure) {
+    public Structure save(Structure structure) throws Exception {
         if (structure != null) {
-            if(structure.getStructureParent() == null) {
-                Structure parent = getStructureByCode(Constantes.CODE_STRUCT_BCEAO);
-                if(parent != null) {
-                    structure.setStructureParent(parent);
-                    structure.setLevelPath(parent.getLevelPath()+1);
-                    structure.setTreePath(parent.getTreePath()+"/"+structure.getCode());
-                }
+            Structure parent= structure.getStructureParent() == null ? getStructureByCode(Constantes.CODE_STRUCT_BCEAO) : structure.getStructureParent() ;
+            if(parent != null) {
+                structure.setStructureParent(parent);
+                structure.setLevelPath(parent.getLevelPath()+1);
+                structure.setTreePath(parent.getTreePath()+"/"+structure.getCode());
             }
         }
 
@@ -34,7 +32,9 @@ public class StructureServiceImpl implements StructureService   {
 
     @Override
     public Structure getStructureByCode(String code) {
-        String query ="select e from Structure e where e.code='"+code+"'";
-        return dataManager.loadValue(query, Structure.class).one();
+        return dataManager.load( Structure.class)
+                .query("select s from Structure s where s.code=:code")
+                .parameter("code",code)
+                .one();
     }
 }

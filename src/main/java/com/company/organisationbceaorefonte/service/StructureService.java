@@ -4,7 +4,7 @@ import com.company.organisationbceaorefonte.entity.Structure;
 
 public interface StructureService {
 
-    Structure save(Structure structure);
+    Structure save(Structure structure) throws Exception;
 
     Structure getStructureByCode(String code);
 }

@@ -51,7 +51,7 @@
             <columns resizable="true">
                 <column property="code"/>
                 <column property="libelle"/>
-                <column property="description"/>
+               <!-- <column property="description"/>-->
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

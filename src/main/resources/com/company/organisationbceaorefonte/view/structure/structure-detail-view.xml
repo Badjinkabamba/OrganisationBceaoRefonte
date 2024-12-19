@@ -46,8 +46,8 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
-            <textField id="levelPathField" property="levelPath"/>
-            <textArea id="treePathField" height="9.5em" property="treePath"/>
+            <!--<textField id="levelPathField" property="levelPath"/>
+            <textArea id="treePathField" height="9.5em" property="treePath"/>-->
             <!--<textField id="referenceField" property="reference"/>-->
             <textArea id="commentaireField" height="9.5em" property="commentaire"/>
         </formLayout>
