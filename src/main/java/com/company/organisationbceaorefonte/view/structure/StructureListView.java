@@ -32,9 +32,13 @@ public class StructureListView extends StandardListView<Structure> {
         System.out.println("Txxype; " + codes);
         //structuresDl.setParameter("code", codes);
         if (codes == null || codes.isEmpty()) {
-            structuresDl.removeParameter("code"); // Ne passez pas de paramètre si vous ne voulez pas filtrer
+            structuresDl.setParameter("size", codes.size());
+            structuresDl.setParameter("codes", codes);
+
         } else {
-            structuresDl.setParameter("code", codes);
+            structuresDl.setParameter("size", codes.size());
+            structuresDl.setParameter("codes", codes);
+
         }
         structuresDl.load();
 

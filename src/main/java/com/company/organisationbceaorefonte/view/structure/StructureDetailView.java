@@ -5,10 +5,12 @@ import com.company.organisationbceaorefonte.entity.TypeStructure;
 import com.company.organisationbceaorefonte.service.StructureService;
 import com.company.organisationbceaorefonte.view.main.MainView;
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.flowui.DialogWindows;
+import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.valuepicker.EntityPicker;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.model.CollectionContainer;
@@ -32,10 +34,11 @@ public class StructureDetailView extends StandardDetailView<Structure> {
     private EntityPicker<Structure> structureParentField;
 
      List<String> listeCode = new ArrayList<>();
-/* @ViewComponent
-    private CollectionContainer<Structure> structuresParentDc;*/
-@Autowired
-private DialogWindows dialogWindows;
+
+    @Autowired
+    private DialogWindows dialogWindows;
+    @Autowired
+    private Notifications notifications;
 
     private void openViewWithParams(List<String> codes) {
         dialogWindows.lookup(this, Structure.class)
@@ -43,19 +46,18 @@ private DialogWindows dialogWindows;
                 .withSelectHandler(structure -> {
                   getEditedEntity().setStructureParent(structure.stream().findFirst().get());
                 })
-//                .withViewConfigurer(view -> {
-//                    // Assuming the lookup view has a data loader with the ID "structuresDl"
-//                    view.setTypeStructure("TYPE_STRUCT_GOUVERNEMENT");
-//                })
-                .withAfterOpenListener(afterOpenEvent -> {
-                    final StructureListView view = afterOpenEvent.getView();
-                    DataLoader dataLoader = view.getStructuresDl();
-                    if (dataLoader != null) {
-
-                        dataLoader.setParameter("code",codes);
-                        dataLoader.load();
-                    }
+                .withViewConfigurer(view -> {
+                    view.setTypeStructure(codes);
                 })
+//                .withAfterOpenListener(afterOpenEvent -> {
+//                    final StructureListView view = afterOpenEvent.getView();
+//                    DataLoader dataLoader = view.getStructuresDl();
+//                    if (dataLoader != null) {
+//
+//                        dataLoader.setParameter("codes",codes);
+//                        dataLoader.load();
+//                    }
+//                })
                 .open();
     }
     @Subscribe("typeStructureField")
@@ -70,7 +72,18 @@ private DialogWindows dialogWindows;
 
     @Subscribe("structureParentField.entityLookup")
     public void onStructureParentFieldEntityLookup(final ActionPerformedEvent event) {
-        openViewWithParams(listeCode);
+        Structure structure = getEditedEntity();
+        if(structure.getTypeStructure() == null) {
+            notifications.create("Veillez d'abord choisir le type de structure")
+                    .withType(Notifications.Type.ERROR)
+                    .withPosition(Notification.Position.MIDDLE)
+                    .withDuration(3000)
+                    .show();
+        }
+        else {
+            openViewWithParams(listeCode);
+        }
+
     }
 
 

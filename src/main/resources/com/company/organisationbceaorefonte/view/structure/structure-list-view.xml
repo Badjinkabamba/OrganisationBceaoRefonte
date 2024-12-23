@@ -13,7 +13,7 @@
             </fetchPlan>
             <loader id="structuresDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from Structure e where :code is null or e.typeStructure.code in (:code) ]]>
+                    <![CDATA[select e from Structure e where ( 0=:size  or e.typeStructure.code in :codes) ]]>
                 </query>
             </loader>
         </collection>
