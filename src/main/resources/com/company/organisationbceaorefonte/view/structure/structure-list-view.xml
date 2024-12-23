@@ -17,6 +17,17 @@
                 </query>
             </loader>
         </collection>
+        <collection id="structuresDc_1" class="com.company.organisationbceaorefonte.entity.Structure">
+            <fetchPlan extends="_local">
+                <property name="structureParent" fetchPlan="_local"/>
+<!--                <property name="assignee" fetchPlan="_local"/>-->
+            </fetchPlan>
+            <loader id="structuresDl_1" readOnly="true">
+                <query>
+                    <![CDATA[select e from Structure e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -41,29 +52,47 @@
             <button id="removeButton" action="structuresDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="structuresDl"/>
         </hbox>
-        <dataGrid id="structuresDataGrid"
-                  width="100%"
-                  minHeight="20em"
-                  dataContainer="structuresDc"
-                  columnReorderingAllowed="true">
-            <actions>
-                <action id="create" type="list_create"/>
-                <action id="edit" type="list_edit"/>
-                <action id="refresh" type="list_refresh"/>
-                <action id="remove" type="list_remove"/>
-            </actions>
-            <columns resizable="true">
-                <column property="code"/>
-                <column property="libelle"/>
-                <column property="typeStructure"/>
-                <column property="site"/>
-                <column property="structureParent" header="Structure de rattachement"/>
-                <!--<column property="levelPath"/>
-                <column property="treePath"/>
-                <column property="reference"/>
-                <column property="commentaire"/>-->
-            </columns>
-        </dataGrid>
+        <tabSheet width="100%" id="tabsheetId">
+            <tab id="listeId" label="Liste des structures"  >
+                <dataGrid id="structuresDataGrid"
+                          width="100%"
+                          minHeight="20em"
+                          dataContainer="structuresDc"
+                          columnReorderingAllowed="true">
+                    <actions>
+                        <action id="create" type="list_create"/>
+                        <action id="edit" type="list_edit"/>
+                        <action id="refresh" type="list_refresh"/>
+                        <action id="remove" type="list_remove"/>
+                    </actions>
+                    <columns resizable="true">
+                        <column property="code"/>
+                        <column property="libelle"/>
+                        <column property="typeStructure"/>
+                        <column property="site"/>
+                        <column property="structureParent" header="Structure de rattachement"/>
+
+                    </columns>
+                </dataGrid>
+            </tab>
+            <tab id="arborescenceId" label="Arborescence des structures">
+                <treeDataGrid id="structuresTreeDataGrid" dataContainer="structuresDc" hierarchyProperty="structureParent"
+                              minWidth="100px" width="100%" >
+                    <actions>
+                        <action id="refresh" type="list_refresh"/>
+                    </actions>
+                    <columns>
+                        <column property="code"/>
+                        <column property="libelle"/>
+                        <column property="site"/>
+                        <column property="typeStructure"/>
+                    </columns>
+                </treeDataGrid>
+
+
+            </tab>
+        </tabSheet>
+
         <hbox id="lookupActions" visible="false">
             <button id="selectButton" action="selectAction"/>
             <button id="discardButton" action="discardAction"/>

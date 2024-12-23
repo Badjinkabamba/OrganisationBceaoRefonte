@@ -4,4 +4,18 @@
             <property name="structureParent" fetchPlan="_base"/>
         </property>
     </fetchPlan>
+    <fetchPlan entity="Structure" name="structure-fetch-plan_1" extends="_base">
+        <property name="typeStructure" fetchPlan="_base"/>
+        <property name="site" fetchPlan="_base"/>
+        <property name="structureParent" fetchPlan="_base"/>
+    </fetchPlan>
+    <fetchPlan entity="Structure" name="structure-fetch-plan_2" extends="_base">
+        <property name="structureParent" fetchPlan="_base">
+            <property name="structureParent" fetchPlan="_base">
+                <property name="structureParent" fetchPlan="_base">
+                    <property name="structureParent" fetchPlan="_base"/>
+                </property>
+            </property>
+        </property>
+    </fetchPlan>
 </fetchPlans>

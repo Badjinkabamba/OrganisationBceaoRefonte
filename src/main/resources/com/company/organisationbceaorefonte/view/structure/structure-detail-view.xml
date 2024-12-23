@@ -51,8 +51,10 @@
             <!--<textField id="referenceField" property="reference"/>-->
             <textArea id="commentaireField" height="9.5em" property="commentaire"/>
         </formLayout>
+
         <hbox id="detailActions">
             <button id="saveAndCloseButton" action="saveAction"/>
+
             <button id="closeButton" action="closeAction"/>
         </hbox>
     </layout>

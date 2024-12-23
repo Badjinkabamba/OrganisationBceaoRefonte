@@ -2,10 +2,17 @@ package com.company.organisationbceaorefonte.view.structure;
 
 import com.company.organisationbceaorefonte.entity.Structure;
 import com.company.organisationbceaorefonte.entity.TypeStructure;
+import com.company.organisationbceaorefonte.service.AgentService;
 import com.company.organisationbceaorefonte.view.main.MainView;
+import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.router.Route;
+import io.jmix.core.DataManager;
+import io.jmix.flowui.component.grid.TreeDataGrid;
+import io.jmix.flowui.data.grid.ContainerTreeDataGridItems;
+import io.jmix.flowui.data.grid.TreeDataGridItems;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.view.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,21 +28,26 @@ public class StructureListView extends StandardListView<Structure> {
     private String code;
     @ViewComponent
     private CollectionLoader<Structure> structuresDl;
-
+    @ViewComponent
+    private TreeDataGrid<Structure> structuresTreeDataGrid;
+    @ViewComponent("tabsheetId.arborescenceId")
+    private Tab tabsheetIdArborescenceId;
+    @Autowired
+    private AgentService agentService;
 
     public void setTypeStructure(List<String> codes) {
         this.codes = codes;
     }
 
+
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
-        System.out.println("Txxype; " + codes);
-        //structuresDl.setParameter("code", codes);
         if (codes == null || codes.isEmpty()) {
             structuresDl.setParameter("size", codes.size());
             structuresDl.setParameter("codes", codes);
 
         } else {
+            tabsheetIdArborescenceId.setVisible(false);
             structuresDl.setParameter("size", codes.size());
             structuresDl.setParameter("codes", codes);
 
