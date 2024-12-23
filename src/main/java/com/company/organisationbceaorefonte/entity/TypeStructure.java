@@ -26,9 +26,6 @@ public class TypeStructure {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
-    @Column(name = "VERSION", nullable = false)
-    @Version
-    private Integer version;
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -56,8 +53,8 @@ public class TypeStructure {
     @Column(name = "DESCRIPTION")
     private String description;
     @JoinTable(name = "TYPE_STRUCTURE_TYPE_LINK",
-            joinColumns = @JoinColumn(name = "TYPE_STRUCTURE_1_ID"),
-            inverseJoinColumns = @JoinColumn(name = "TYPE_STRUCTURE_2_ID"))
+            joinColumns = @JoinColumn(name = "TYPE_STRUCTURE_1_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TYPE_STRUCTURE_2_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<TypeStructure> typeStructureParent;
 
@@ -139,14 +136,6 @@ public class TypeStructure {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public UUID getId() {

@@ -47,9 +47,6 @@ public class Site {
     @DeletedDate
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
-    @Column(name = "VERSION", nullable = false)
-    @Version
-    private Integer version;
     @Column(name = "CODE", nullable = false)
     @NotNull
     private String code;
@@ -111,14 +108,6 @@ public class Site {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public OffsetDateTime getDeletedDate() {

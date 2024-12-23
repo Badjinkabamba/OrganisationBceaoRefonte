@@ -30,9 +30,6 @@ public class Agent {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
-    @Column(name = "VERSION", nullable = false)
-    @Version
-    private Integer version;
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -242,14 +239,6 @@ public class Agent {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public UUID getId() {
