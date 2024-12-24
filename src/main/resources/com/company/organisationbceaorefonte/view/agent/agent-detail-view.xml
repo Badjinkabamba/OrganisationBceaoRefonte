@@ -26,18 +26,18 @@
                 <responsiveStep minWidth="0" columns="1"/>
                 <responsiveStep minWidth="40em" columns="2"/>
             </responsiveSteps>
-            <textField id="matriculeField" property="matricule" readOnly="true" required="false" visible="false"/>
-            <textField id="nomPatronomiqueField" property="nomPatronomique"/>
-            <textField id="prenomsField" property="prenoms"/>
+            <textField id="matriculeField" property="matricule" readOnly="true" required="false" />
+            <textField id="nomPatronomiqueField" property="nomPatronomique" required="true"/>
+            <textField id="prenomsField" property="prenoms" required="true"/>
             <textField id="adresseField" property="adresse"/>
             <textField id="telephoneField" property="telephone"/>
             <textField id="emailField" property="email"/>
-            <datePicker id="dateNaissanceField" property="dateNaissance"/>
+            <datePicker id="dateNaissanceField" property="dateNaissance" required="true"/>
             <textField id="lieuNaissanceField" property="lieuNaissance"/>
-            <textField id="nationnaliteField" property="nationnalite"/>
-            <select id="sexeField" property="sexe"/>
+            <textField id="nationnaliteField" property="nationnalite" required="true"/>
+            <select id="sexeField" property="sexe" required="true"/>
             <datePicker id="dateEmbaucheField" property="dateEmbauche"/>
-            <entityPicker id="structureField" property="structure">
+            <entityPicker id="structureField" property="structure" required="true">
                 <actions>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>

@@ -25,7 +25,7 @@ import java.util.List;
 @DialogMode(width = "64em")
 public class StructureListView extends StandardListView<Structure> {
     private List<String> codes = new ArrayList<>();
-    private String code;
+    private boolean autreComosant;
     @ViewComponent
     private CollectionLoader<Structure> structuresDl;
     @ViewComponent
@@ -39,19 +39,14 @@ public class StructureListView extends StandardListView<Structure> {
         this.codes = codes;
     }
 
+    public void setAutreComosant(boolean autreComosant) {this.autreComosant = autreComosant;}
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
-        if (codes == null || codes.isEmpty()) {
-            structuresDl.setParameter("size", codes.size());
-            structuresDl.setParameter("codes", codes);
+        structuresDl.setParameter("size", autreComosant ? 1 : 0);
+        structuresDl.setParameter("codes", codes!=null ? codes : new ArrayList<>());
+        tabsheetIdArborescenceId.setVisible(!autreComosant);
 
-        } else {
-            tabsheetIdArborescenceId.setVisible(false);
-            structuresDl.setParameter("size", codes.size());
-            structuresDl.setParameter("codes", codes);
-
-        }
         structuresDl.load();
 
     }

@@ -22,10 +22,10 @@
                 <responsiveStep minWidth="0" columns="1"/>
                 <responsiveStep minWidth="40em" columns="2"/>
             </responsiveSteps>
-            <textField id="libelleField" property="libelle"/>
-            <textField id="codeIso2Field" property="codeIso2"/>
-            <textField id="codeIso3Field" property="codeIso3"/>
-            <checkbox id="isUemoaField" property="isUemoa"/>
+            <textField id="libelleField" property="libelle" required="true"/>
+            <textField id="codeIso2Field" property="codeIso2" required="true"/>
+            <textField id="codeIso3Field" property="codeIso3" required="true"/>
+            <checkbox id="isUemoaField" property="isUemoa" />
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseButton" action="saveAction"/>

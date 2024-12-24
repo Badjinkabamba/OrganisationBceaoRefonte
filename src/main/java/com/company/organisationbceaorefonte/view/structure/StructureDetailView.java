@@ -5,6 +5,7 @@ import com.company.organisationbceaorefonte.entity.TypeStructure;
 import com.company.organisationbceaorefonte.service.StructureService;
 import com.company.organisationbceaorefonte.view.main.MainView;
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.Route;
@@ -13,6 +14,7 @@ import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.valuepicker.EntityPicker;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionContainer;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.model.DataLoader;
@@ -48,6 +50,7 @@ public class StructureDetailView extends StandardDetailView<Structure> {
                 })
                 .withViewConfigurer(view -> {
                     view.setTypeStructure(codes);
+                    view.setAutreComosant(true);
                 })
 //                .withAfterOpenListener(afterOpenEvent -> {
 //                    final StructureListView view = afterOpenEvent.getView();

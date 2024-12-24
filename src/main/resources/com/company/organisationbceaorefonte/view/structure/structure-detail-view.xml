@@ -26,15 +26,15 @@
                 <responsiveStep minWidth="0" columns="1"/>
                 <responsiveStep minWidth="40em" columns="2"/>
             </responsiveSteps>
-            <textField id="codeField" property="code"/>
+            <textField id="codeField" property="code" required="true"/>
             <textField id="libelleField" property="libelle"/>
-            <entityPicker id="typeStructureField" property="typeStructure">
+            <entityPicker id="typeStructureField" property="typeStructure" required="true">
                 <actions>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
-            <entityPicker id="siteField" property="site">
+            <entityPicker id="siteField" property="site" required="true">
                 <actions>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>
@@ -46,9 +46,6 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
-            <!--<textField id="levelPathField" property="levelPath"/>
-            <textArea id="treePathField" height="9.5em" property="treePath"/>-->
-            <!--<textField id="referenceField" property="reference"/>-->
             <textArea id="commentaireField" height="9.5em" property="commentaire"/>
         </formLayout>
 

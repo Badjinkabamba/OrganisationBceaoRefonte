@@ -19,5 +19,8 @@ public class AgentEventListener {
    if (event.isNewEntity()) {
        event.getEntity().setMatricule(agentService.getMatriculeAgent());
    }
+   if(event.getEntity().getSiteAffectation()==null) {
+       event.getEntity().setSiteAffectation(event.getEntity().getStructure().getSite());
+   }
     }
 }

@@ -58,8 +58,9 @@ public class Site {
     private String telephone;
     @Column(name = "FAX")
     private String fax;
-    @JoinColumn(name = "PAYS_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(name = "PAYS_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Pays pays;
 
     public Pays getPays() {
